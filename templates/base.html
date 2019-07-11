@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{%block title%}Poster{%endblock%}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Bootstrap 4.3.1-->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--Font Awesome 5.8.2 free -->
+    <link href="{% static 'vendor/fontawesome/css/all.css' %}" rel="stylesheet">
+    <!--Custom Style Css-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% block css%}{%endblock%}
+    <!--Custom Background-->
+    <link href="{% static 'css/responsive-full-background-image.css' %}" rel="stylesheet">
+    <!--Comment-->
+    <link href="{% static 'css/comment.css'%}" rel="stylesheet">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    {% include 'navbar.html' %}
+    <div class="mt-5">
+    {% block content %}
+    {% endblock %}
+    </div>
+
+    <!-- Jquery 3.4.1 -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <!--Bootstrap 4.3.1-->
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--Font Awesome 5.8.2 free -->
+    <script src="{% static 'vendor/fontawesome/js/all.js' %}"></script>
+    <!--Custom Js from any template-->
+    {% block script%}{%endblock%}
+</body>
+
+</html>

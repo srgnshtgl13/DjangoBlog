@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load post_extras %}
+{%block title%}{{block.super}} - {{request.get_full_path|getname|capfirst}}'s Posts{% endblock %}
+{%block content%}
+<div class="container">
+        {{request.get_full_path|getname|capfirst}}<br>
+        {%if page_obj%}
+        {%for cp in page_obj%}
+        {{cp.title}}<br>
+        {%endfor%}
+        {%endif%}
+</div>
+
+{%endblock%}

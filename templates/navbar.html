@@ -1,0 +1,87 @@
+{% load static %}
+{% load active_link_tags %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top polaroid">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand text-black" href="{% url 'home' %}">
+        <img src="{% static 'image/bootstrap-solid.png' %}" width="30" height="30" class="d-inline-block align-top"
+            alt="">
+        Poster
+    </a>
+    <div class="collapse navbar-collapse ml-5" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item nav-custom">
+                <a class="nav-link custom-font text-black active {% active_link 'home' 'hit-the-floor' strict=True %}"
+                    href="{% url 'home' %}">home</a>
+            </li>
+            <li class="nav-item nav-custom">
+                <a class="nav-link custom-font text-black active {% active_link 'about' 'hit-the-floor' strict=True %}"
+                    href="{% url 'about' %}">about</a>
+            </li>
+            <li class="nav-item nav-custom">
+                <a class="nav-link custom-font text-black active {% active_link 'post:index' 'hit-the-floor' strict=True %}"
+                    href="{%url 'post:index' %}">posts</a>
+            </li>
+            <li class="nav-item nav-custom">
+                <a class="nav-link custom-font text-black active {% active_link 'post:create' 'hit-the-floor' strict=True %}"
+                    href="{%url 'post:create' %}">add a post</a>
+            </li>
+        </ul>
+        {% if not request.user.is_authenticated %}
+        <ul class="navbar-nav justify-content-end margin-logreg">
+            <li class="nav-item">
+                <a class="nav-link active text-black custom-font effect-box {% active_link 'accounts:login' 'hit-the-floor' strict=True %}"
+                    href="{% url 'accounts:login' %}?next=/">login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active text-black custom-font effect-box {% active_link 'accounts:sign_up' 'hit-the-floor' strict=True %}"
+                    href="{% url 'accounts:sign_up' %}">register</a>
+            </li>
+        </ul>
+        {%else%}
+        <ul class="navbar-nav justify-content-end margin-logreg">
+            <li class="nav-item">
+                <a class="nav-link active text-black custom-font effect-box {% active_link 'userprofile:profile' 'hit-the-floor' strict=True %}" 
+                href="{% url 'userprofile:profile' %}"> {{request.user.first_name}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active text-black custom-font effect-box ml-3 
+                {% active_link 'accounts:password_change' 'hit-the-floor' strict=True %}" href="{% url 'accounts:password_change' %}">change password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active text-black custom-font effect-box poweroff ml-3" href="{% url 'accounts:logout' %}"><i class="fas fa-power-off"></i></a>
+            </li>
+        </ul>
+
+        {%endif%}
+        
+
+        <!--
+            <form class="form-inline my-2 my-lg-0 mx-lg-5" role="search" method="GET">
+            <input class="form-control mr-sm-2 brdr" type="search" placeholder="Search" name="q"
+                value="{{request.GET.q}}" aria-label="Search">
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">&#128270;</button>
+        </form>
+        -->
+    </div>
+</nav>
+{% block css%}
+<style>
+    .poweroff:hover{
+        color:red !important;
+    }
+    nav.polaroid {
+        width: 100%;
+        box-shadow: 0 11px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: center;
+        opacity: 0.8;
+      }
+      .text-black{
+          color: #000000;
+      }
+</style>
+
+
+{%endblock%}

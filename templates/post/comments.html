@@ -1,0 +1,74 @@
+{% load crispy_forms_tags %}
+
+<div class="col-12 col-md-12">
+    <form method="post">{% csrf_token %}
+
+        <div class="col-12 col-md-12">
+            <!-- if visited user make comment make name field visible-->
+            {%if not request.user.is_authenticated%}
+            {{form.name|as_crispy_field}}
+            {%endif%}
+            <!-- /if visited user make comment make name field visible-->
+            {{form.content|as_crispy_field}}
+            <input class="mt-1 mb-5 btn btn-primary" type="submit" value="Submit" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+
+
+
+
+    </form>
+</div>
+
+<!--
+
+<div class="container pb-cmnt-container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-info">
+
+                <div class="panel-body">
+
+                    {% if form.content.errors %}
+                    <ol>
+                        {% for error in form.content.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                    </ol>
+                    {% endif %}
+
+                    <form class="form-inline" method="post">{% csrf_token %}
+
+                        {{ form.non_field_errors }}
+                        <div class="fieldWrapper">
+                            {{ form.content.errors }}
+                            <label for="{{ form.content.id_for_label }}">Comment:</label>
+                            {{ form.content }}
+                        </div>
+
+                        <button class="btn btn-primary justify-content-end" type="submit">Share</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block css%}
+<style>
+    .pb-cmnt-container {
+        font-family: Lato;
+        margin-bottom: 100px;
+        margin-top: 25px;
+    }
+
+    .pb-cmnt-textarea {
+        resize: none;
+        padding: 20px;
+        
+        border: 1px solid #F2F2F2;
+    }
+</style>
+-->
+
+{%endblock%}

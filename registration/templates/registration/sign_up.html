@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{%block title%} {{block.super}} - Signup {%endblock%}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+    <div class="justify-content-center align-items-center" style="height:80vh;">
+        <div class="col-8 col-md-8">
+            <h3 class="font-weight-bold">Register</h3>
+        </div>
+        <div class="col-8 col-md-8 border p-3">
+            {% if form.errors %}
+            <p class="bg-danger p-2">Please give correct information !</p>
+            {% endif %}
+
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ form|crispy }}
+                
+                
+                <input class="mt-3 btn btn-success" type="submit" value="Register" />
+                <input type="hidden" name="next" value="{{ next }}" />
+                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

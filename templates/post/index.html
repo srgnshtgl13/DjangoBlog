@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title%} {{block.super}} - Posts {% endblock %}
+{%block content%}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-8 col-md-8">
+            <h2>All Posts</h2>
+            <hr class="style-seven">
+            <div class="row">
+                {% if all_posts%}
+                {% for p in all_posts%}
+                <div class="col-5 col-md-5 ml-4 custom-div justify-content-center" title="{{p.title}}">
+                    <p>{{p.title|truncatechars:10}}</p>
+                    <p class="font-weight-bold">by {{p.user}}</p>
+                    <!--if the user who has login he can make something(delete,update) over his post-->
+                    <small title="Remove your post permenantly" class="float-right">{%if request.user == p.user%}<a class="btn btn-danger btn-sm text-white"><i class="fas fa-trash-alt"></i></a>{%endif%}</small>
+                    <p><a href="{{p.get_absolute_url}}" class="effect-shine text-success font-weight-bold border border-dark ">
+                        Detail
+                        </a></p>
+
+                </div>
+                {%endfor%}
+                {%else%}
+                <div class="col-3 col-md-3">
+                    <p class="text-danger font-weight-bold">No match!</p>
+                </div>
+                {%endif%}
+            </div>
+            {% if is_paginated %}
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="pagination justify-content-center">
+                        <span class="step-links">
+
+                            <ul class="pagination pagination-lg justify-content-center">
+                                {% if page_obj.has_previous %}
+                                <li><a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                        class="effect-box font-weight-bolder text-dark mr-3">first</a></li>
+                                <li><a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                        class="effect-box font-weight-bolder text-dark">&laquo;</a></li>
+                                {% endif %}
+                                {% for i in paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                <li class="active ml-3 mr-3"><span
+                                        class="text-white badge badge-pill badge-dark">{{ i }} <span
+                                            class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                <li><a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                        class="effect-box font-weight-bolder text-dark mr-3 ml-3">{{ i }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                        class="effect-box font-weight-bolder text-dark">&raquo;</a></li>
+                                <li><a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                        class="effect-box font-weight-bolder text-dark ml-3">last</a></li>
+
+                                {% endif %}
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+        <div class="col-4 col-md-4">
+                
+            {%include './search-bar.html'%}<hr class="style-seven">
+            {%include './categories.html'%}
+
+        </div>
+    </div>
+
+</div>
+
+{%endblock%}

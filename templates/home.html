@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{%block title%}{{block.super}}{%endblock%}
+
+{%block content%}
+
+<div class="container">
+       
+        <div class="row">
+                <div class="col-8 col-md-8">
+                        
+                        {% if request.GET.q %}<h2>Your Searchs</h2>{%else%}<h2>Recent 5 Posts</h2>{%endif%}
+                        
+                        
+                        <hr class="style-seven">
+                        <div class="row">
+                                {% if posts%}
+                                {% for lp in posts%}
+                                <!-- <p>{{ forloop.counter }} - <strong>{{lp.title}} - Author: <a href="{{lp.get_user_url}}"
+                                                class="customhover"> {{lp.user}} </a></strong></p> -->
+
+
+                                <div class="col-5 col-md-5 ml-4 custom-div justify-content-center align-middle" title="{{lp.title}}">
+                                        <small>{{lp.title|truncatechars:10}}</small>
+                                        <h5>by {{lp.user}}</h5>
+                                        <small title="Delete your post!" class="float-right">{%if request.user == lp.user%}<a class="btn btn-danger btn-sm text-white"><i class="fas fa-trash-alt"></i></a>{%endif%}</small>
+                                        <p><a href="{{lp.get_absolute_url}}" id="detailHover" class="effect-shine text-success font-weight-bold">View ...
+                                                
+                                        </a></p>
+
+                                </div>
+
+                                {%endfor%}
+                                {%endif%}
+                        </div>
+                        {%if posts.has_other_pages%}
+                        <div class="row">
+                                <div class="col-12 col-md-12">
+                                        <div class="pagination justify-content-center">
+                                                <span class="step-links">
+
+                                                        <ul class="pagination pagination-lg justify-content-center">
+                                                                {% if posts.has_previous %}
+                                                                <li><a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                                                                class="effect-box font-weight-bolder text-dark mr-3">first</a>
+                                                                </li>
+                                                                <li><a href="?page={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                                                                class="effect-box font-weight-bolder text-dark">&laquo;</a>
+                                                                </li>
+                                                                {% endif %}
+                                                                {% for i in posts.paginator.page_range %}
+                                                                {% if posts.number == i %}
+                                                                <li class="active ml-3 mr-3"><span
+                                                                                class="text-white badge badge-pill badge-dark">{{ i }}
+                                                                                <span
+                                                                                        class="sr-only">(current)</span></span>
+                                                                </li>
+                                                                {% else %}
+                                                                <li><a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                                                                class="effect-box font-weight-bolder text-dark mr-3 ml-3">{{ i }}</a>
+                                                                </li>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% if posts.has_next %}
+                                                                <li><a href="?page={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                                                                class="effect-box font-weight-bolder text-dark">&raquo;</a>
+                                                                </li>
+                                                                <li><a href="?page={{ posts.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                                                                                class="effect-box font-weight-bolder text-dark ml-3">last</a>
+                                                                </li>
+
+                                                                {% endif %}
+                                                        </ul>
+                                                </span>
+                                        </div>
+                                </div>
+                        </div>
+                        {%endif%}
+                </div>
+
+                <!--Categorries-->
+                <div class="col-4 col-md-4">
+                        {% include './post/search-bar.html'%}
+                        <hr class="style-seven">
+                        {%include './post/categories.html'%}
+                </div>
+                <!--Categorries-->
+
+
+        </div>
+</div>
+
+
+
+{%endblock%}
+{% block css%}
+<style>
+        #detailHover:hover{
+        background: none;
+        color: rgb(89, 83, 179) !important;
+        text-decoration: none !important;
+        border-right: 1px;
+        }
+</style>
+<link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+{% endblock%}

@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{%block title%}{{block.super}} - {{object.title|capfirst}} Details {% endblock %}
+{% block content%}
+<!-- top button -->
+
+
+<!-- top button -->
+<div class="container">
+    <div class="row">
+        <div class="col-8 col-md-8">
+            <h3>{{object.title}}</h3>
+            <small>by {{object.user}}</small>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent">
+                    {%if object.category.get_ancestors%}
+                    {%for ancestor in object.category.get_ancestors%}
+                    <li class="breadcrumb-item"><small>{{ancestor}}</small></li>
+                    {%endfor%}
+                    {%endif%}
+                    {%if object.category.name%}
+                    <li class="breadcrumb-item active" aria-current="page"><small><a
+                                href="{{object.category.get_absolute_url}}">{{object.category.name}}</a></small></li>
+                    {%endif%}
+                </ol>
+            </nav>
+            <hr>
+            {%if object.image%}
+            <div class="col-md-12 mb-3">
+                <div class="thumbnail">
+                    <a href="{{object.image.url}}">
+                        <img src="{{object.image.url}}" alt="{{object.title}}"
+                            class="rounded mx-auto d-block img-responsive" height="65%" style="width:70%">
+                    </a>
+                </div>
+            </div>
+            {%endif%}
+
+            <div class="col-12 col-md-12">
+                <div class="card bg-transparent">
+                    {{object.content|safe|linebreaks}}
+
+                </div>
+
+            </div>
+            <div class="col-10 col-md-10">
+                <hr>
+                <div class="row">
+                    <small title="Created"><i class="fas fa-calendar"></i> {{object.publishing_date|timesince}}
+                        ago</small>
+                    <small title="Comments">{%if object.post_comments.all%} | <i class="fas fa-comment"></i>
+                        {{object.post_comments.all|length}} Comments{%endif%} </small>
+
+                </div>
+
+            </div>
+
+            <div class="col-11 col-md-11">
+                {% if object.post_comments.all %}
+                <hr>
+
+                <h2 class="page-header">Comments</h2><hr>
+                <!--Get Comments-->
+
+
+                {%for comment in object.post_comments.all%}
+
+
+                <div class="card col-12 col-md-12 mb-3" style="width: 30rem;">
+                    <div class="card-body">
+                        
+                        {%if comment.created_by.username %}
+                        <h5 class="card-title">{{comment.created_by.username|capfirst}}</h5>
+                        {%elif comment.name%}
+                        <h5 class="card-title">{{comment.name|capfirst}}</h5>
+                        {%elif not comment.created_by and not comment.name%}
+                        <h5 class="card-title">Anonim</h5>
+                        {%endif%}
+                        
+                        <h6 class="card-subtitle mb-2 text-muted"><time class="comment-date ml-3"><i
+                                    class="fas fa-clock"></i>
+                                <small>{{comment.created_date|timesince}} ago</small></time></h6>
+
+                        <p class="card-text">{{ comment.content | linebreaks | safe}}</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+
+                {%endfor%}
+
+
+                <!--if comment is made in successfully come to this div-->
+                <div id="success-comment"></div>
+                <!--/if comment is made in successfully come to this div-->
+
+                {%else%}
+                <hr>
+                <h2 class="page-header">No Comments! Be first...</h2>
+
+                {%endif%}
+
+                <!--/Get Comments-->
+
+                <!--if error login come to this div-->
+                <div id="error-login"></div>
+                <!--/if error login come to this div-->
+
+                <!--Add Comment-->
+                <h5 class="border-top border-dark mt-5">Add a Comment</h5>
+                <div id="form-error"></div>
+
+                <!-- Django message framework-->
+                {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }} alert-dismissible fade show" {% endif %}
+                    role="alert">
+
+                    <strong>Holy shit!</strong> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <!-- /Django message framework-->
+
+                {%include './comments.html'%}
+                <!--/Add Comment-->
+            </div>
+
+        </div>
+        <div class="col-4 col-md-4">
+            {%include './categories.html'%}
+
+
+            <!-- Get related posts if there are. Sure, except the post which is in this page-->
+            {%if list|length != 1 %}
+            <hr class="style-seven">
+            <h5>Posts which are like <strong>{{object.title|capfirst}}</strong></h5><br>
+            {%endif%}
+            {%if list%}
+
+            {% for l in list%}
+            {% if l.title != object.title %}
+            <a href="{{l.get_absolute_url}}">{{l.title}}</a><br>
+            {%endif%}
+            {%endfor%}
+            {%endif%}
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+<button onclick="topFunction()" id="myBtn" class="bg-primary" title="Go to top"><i class="fas fa-chevron-up"></i></button> 
+
+{%endblock%}
+{%block script%}
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+{%endblock%}
+{%block css%}
+<style>
+    #myBtn {
+        display: none; /* Hidden by default */
+        position: fixed; /* Fixed/sticky position */
+        bottom: 20px; /* Place the button at the bottom of the page */
+        right: 30px; /* Place the button 30px from the right */
+        z-index: 99; /* Make sure it does not overlap */
+        border: none; /* Remove borders */
+        outline: none; /* Remove outline */
+        color: white; /* Text color */
+        cursor: pointer; /* Add a mouse pointer on hover */
+        padding: 15px; /* Some padding */
+        border-radius: 10px; /* Rounded corners */
+        font-size: 18px; /* Increase font size */
+      }
+      
+      #myBtn:hover {
+        background-color: #555; /* Add a dark-grey background on hover */
+      }
+</style>
+{%endblock%}

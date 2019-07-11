@@ -1,0 +1,89 @@
+{%extends 'base.html' %}
+{%block title%} {{block.super}} - Profile {%endblock%}
+{% load crispy_forms_tags %}
+
+{% block content%}
+<div class="container">
+    <div class="row polaroid mb-4">
+        <div title="{{username}}" class="col-6 col-md-6"><i class="fas fa-user-alt mr-1"></i>username &#10159; {{username}}</div>
+        <div title="{{email}}" class="col-6 col-md-6"><i class="fas fa-envelope mr-1"></i>email &#10159; {{email}}</div>
+    </div>
+    <div class="justify-content-center align-items-center ml-5" style="height:50vh;">
+        <div class="col-8 col-md-8 border-bottom border-dark">
+            <h3>Personal Info</h3>
+        </div>
+
+
+        <div class="col-8 col-md-8 mt-3">
+
+            {% if messages and request.GET.personal %}
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }} alert-dismissible fade show" {% endif %} role="alert">
+
+                <strong>Holy shit!</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{personalform | crispy}}
+                <div class="col-12 col-md-12 d-flex justify-content-between">
+                    <input class="btn btn-success" type="submit" value="Update Personal">
+                </div>
+
+            </form>
+        </div>
+        <hr>
+    </div>
+
+
+</div>
+<div class="container">
+        <div class="justify-content-center align-items-center ml-5" style="height:50vh;">
+                <div class="col-8 col-md-8 border-bottom border-dark">
+                        <h3>Profile Info</h3>
+                    </div>
+
+                    <div class="col-6 col-md-6">
+                
+                        {% if messages and request.GET.profile%}
+                        {% for message in messages %}
+                        <div {% if message.tags %} class="{{ message.tags }} alert-dismissible fade show" {% endif %} role="alert">
+                
+                            <strong>Holy shit!</strong> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <form method="POST">
+                            {% csrf_token %}
+                
+                            {{profileform | crispy}}
+                            <div class="col-12 col-md-12 d-flex mb-4 justify-content-between">
+                                <input class="btn btn-success" type="submit" value="Update Profile">
+                            </div>
+                
+                        </form>
+                    </div>
+        </div>
+
+
+</div>
+
+
+{%endblock%}
+{%block css%}
+<style>
+        div.polaroid {
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+          }
+</style>
+{%endblock%}
