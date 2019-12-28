@@ -23,6 +23,28 @@ A blog application with django framework. It includes tree category system and a
 * $ virtualenv venv
 * Linux => $ source venv/bin/activate
 * Windows => \Scripts\activate
+* $ create **requirements.txt** file and add dependencies like below;<br>
+astroid==2.2.5<br>
+autopep8==1.4.4<br>
+Django==2.2.8<br>
+django-active-link==0.1.5<br>
+django-ckeditor==5.7.1<br>
+django-cleanup==3.2.0<br>
+django-crispy-forms==1.7.2<br>
+django-js-asset==1.2.2<br>
+django-mptt==0.10.0<br>
+isort==4.3.20<br>
+lazy-object-proxy==1.4.1<br>
+mccabe==0.6.1<br>
+pep8==1.7.1<br>
+Pillow==6.2.0<br>
+pycodestyle==2.5.0<br>
+pylint==2.3.1<br>
+pytz==2019.1<br>
+six==1.12.0<br>
+sqlparse==0.3.0<br>
+typed-ast==1.3.5<br>
+wrapt==1.11.1<br>
 * $ pip install -r requirements.txt
 * $ python manage.py migrate
 * finally start the server **$ python manage.py runserver**
