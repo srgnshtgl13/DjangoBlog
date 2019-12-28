@@ -1,20 +1,6 @@
 # DjangoBlog
 ## Description
 A blog application with django framework. It includes tree category system and advanced registration system of django.
-## what it includes 
-### - django-active-link
-### - django-ckeditor
-### - django-cleanup
-### - django-crispy-forms
-### - django-mptt
-### - Pillow
-### - Relational Database System
-### - Image Field
-### - Email Sender
-### - Bootstrap
-### - responsive background
-### - font-awesome
-### - comment system
 ## Install
 * $ mkdir poster
 * $ cd poster
