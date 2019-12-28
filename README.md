@@ -2,38 +2,40 @@
 ## Description
 A blog application with django framework. It includes tree category system and advanced registration system of django.
 ## Install
-* $ mkdir poster
-* $ cd poster
-* $ git init
-* $ git pull https://github.com/srgnshtgl13/DjangoBlog
-* $ virtualenv venv
-* Linux => $ source venv/bin/activate
-* Windows => \Scripts\activate
-* $ create **requirements.txt** file and add dependencies like below;<br>
-astroid==2.2.5<br>
-autopep8==1.4.4<br>
-Django==2.2.8<br>
-django-active-link==0.1.5<br>
-django-ckeditor==5.7.1<br>
-django-cleanup==3.2.0<br>
-django-crispy-forms==1.7.2<br>
-django-js-asset==1.2.2<br>
-django-mptt==0.10.0<br>
-isort==4.3.20<br>
-lazy-object-proxy==1.4.1<br>
-mccabe==0.6.1<br>
-pep8==1.7.1<br>
-Pillow==6.2.0<br>
-pycodestyle==2.5.0<br>
-pylint==2.3.1<br>
-pytz==2019.1<br>
-six==1.12.0<br>
-sqlparse==0.3.0<br>
-typed-ast==1.3.5<br>
-wrapt==1.11.1<br>
-* $ pip install -r requirements.txt
-* $ python manage.py migrate
-* finally start the server **$ python manage.py runserver**
+`$ mkdir poster`<br>
+`$ cd poster`<br>
+`$ git init`<br>
+`$ git pull https://github.com/srgnshtgl13/DjangoBlog`<br>
+`$ virtualenv venv`<br>
+Linux => `$ source venv/bin/activate`<br>
+Windows => `\Scripts\activate`<br>
+create **requirements.txt** file and add dependencies like below;<br>
+```
+      astroid==2.2.5
+      autopep8==1.4.4
+      Django==2.2.8
+      django-active-link==0.1.5
+      django-ckeditor==5.7.1
+      django-cleanup==3.2.0
+      django-crispy-forms==1.7.2
+      django-js-asset==1.2.2
+      django-mptt==0.10.0
+      isort==4.3.20
+      lazy-object-proxy==1.4.1
+      mccabe==0.6.1
+      pep8==1.7.1
+      Pillow==6.2.0
+      pycodestyle==2.5.0
+      pylint==2.3.1
+      pytz==2019.1
+      six==1.12.0
+      sqlparse==0.3.0
+      typed-ast==1.3.5
+      wrapt==1.11.1
+```
+`$ pip install -r requirements.txt`<br>
+`$ python manage.py migrate`<br>
+finally start the server `$ python manage.py runserver`
 ## Screens
 ### Login
 ![Login](https://user-images.githubusercontent.com/48659439/61064333-3e198980-a40a-11e9-90d6-324ae591c580.jpg)
