@@ -15,6 +15,17 @@ A blog application with django framework. It includes tree category system and a
 ### - responsive background
 ### - font-awesome
 ### - comment system
+## Install
+* $ mkdir poster
+* $ cd poster
+* $ git init
+* $ git pull https://github.com/srgnshtgl13/DjangoBlog
+* $ virtualenv venv
+* Linux => $ source venv/bin/activate
+* Windows => \Scripts\activate
+* $ pip install -r requirements.txt
+* $ python manage.py migrate
+* finally start the server **$ python manage.py runserver**
 ## Screens
 ### Login
 ![Login](https://user-images.githubusercontent.com/48659439/61064333-3e198980-a40a-11e9-90d6-324ae591c580.jpg)
