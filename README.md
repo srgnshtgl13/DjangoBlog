@@ -1,7 +1,7 @@
 # DjangoBlog
 ## Description
 A blog application with django framework. It includes tree category system and advanced registration system of django.
-## Install
+## Installation
 * Clone repository<br>
 `$ git clone https://github.com/srgnshtgl13/DjangoBlog`<br>
 `$ cd DjangoBlog`<br>
