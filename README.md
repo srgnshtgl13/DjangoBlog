@@ -2,14 +2,15 @@
 ## Description
 A blog application with django framework. It includes tree category system and advanced registration system of django.
 ## Install
-`$ mkdir poster`<br>
-`$ cd poster`<br>
-`$ git init`<br>
-`$ git pull https://github.com/srgnshtgl13/DjangoBlog`<br>
-`$ virtualenv venv`<br>
-Linux => `$ source venv/bin/activate`<br>
-Windows => `\Scripts\activate`<br>
-create **requirements.txt** file and add dependencies like below;<br>
+* Clone repository<br>
+`$ git clone https://github.com/srgnshtgl13/DjangoBlog`<br>
+`$ cd DjangoBlog`<br>
+* Add python virtual environment in to the repository<br>
+`$ python3 -m virtualenv venv`<br>
+* Activate python virtual environment<br>
+for Linux => `$ source venv/bin/activate`<br>
+for Windows => `\Scripts\activate`<br>
+* create **requirements.txt** file and add dependencies like below;<br>
 ```
       astroid==2.2.5
       autopep8==1.4.4
@@ -33,9 +34,12 @@ create **requirements.txt** file and add dependencies like below;<br>
       typed-ast==1.3.5
       wrapt==1.11.1
 ```
+* Install dependencies<br>
 `$ pip install -r requirements.txt`<br>
+* Apply Database Migrations<br>
 `$ python manage.py migrate`<br>
-finally start the server `$ python manage.py runserver`
+* start the server<br> 
+`$ python manage.py runserver`
 ## Screens
 ### Login
 ![Login](https://user-images.githubusercontent.com/48659439/61064333-3e198980-a40a-11e9-90d6-324ae591c580.jpg)
